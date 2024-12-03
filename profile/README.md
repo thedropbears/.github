@@ -9,3 +9,8 @@
 <!-- Add links to up to date guides by the team-->
 
 Under construction :construction:
+
+## Guides and Tutorials
+
+- [Development Environment Setup](../guides/development_environment_setup.md)
+- [Git Tutorial](https://github.com/thedropbears/git-tutorial)
