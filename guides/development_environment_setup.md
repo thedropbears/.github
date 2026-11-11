@@ -71,34 +71,6 @@ Next, you will need to generate an SSH key for authentication. Follow the instru
 
 You will now need to add the public key to Github. From your terminal, run `cat ~/.ssh/id_rsa.pub` and copy the output, including the header and trailing email address, to a new key within the GitHub settings, `Github->Settings->SSH and GPG Keys->New SSH Key`.
 
-NOTE: Windows users must run an extra step to ensure this authentication is maintained between reboots. Copy the code block here and paste it into your terminal. This assumes you didn't the ssh key when generating it!
-
-``` bash
-echo 'env=~/.ssh/agent.env
-
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-    (umask 077; ssh-agent >| "$env")
-    . "$env" >| /dev/null ; }
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
-fi
-
-unset env' >> ~/.bashrc
-```
-
-After this, reboot your system for the script to take effect.
-
 At this point, we suggest doing the team [git tutorial](https://github.com/thedropbears/git-tutorial) if you haven't already or are unfamiliar with Git.
 
 ## Repo
